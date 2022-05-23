@@ -8,4 +8,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+    companion object{
+        const val  pass = "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"
+    }
 }
