@@ -7,16 +7,17 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.io.Serializable
 
 @Entity(tableName = "aqiInfoTable")
-@JsonClass(generateAdapter = true)
+
 data class AqiInfo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "aqiInfoId")
     val aqiInfoId : Long,
 
-    @ColumnInfo(name="aqiInfo")
-    val aqiInfo: Long,
+    @ColumnInfo(name="city")
+    val city: String,
 
     @ColumnInfo(name = "category")
     val category: String,
@@ -26,4 +27,4 @@ data class AqiInfo(
 
     @ColumnInfo(name = "pollutant")
     val pollutant: String
-)
+) : Serializable

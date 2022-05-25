@@ -8,8 +8,8 @@ data class AqiInfoAndStation(
     val aqiInfo : AqiInfo,
 
     @Relation(
-        parentColumn = "aqiInfoId",
-        entityColumn = "aqiInfo"
+        parentColumn = "city",
+        entityColumn = "city"
     )
     val station: Station
 )

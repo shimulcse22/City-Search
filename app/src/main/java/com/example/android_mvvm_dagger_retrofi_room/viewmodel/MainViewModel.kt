@@ -2,11 +2,14 @@ package com.example.android_mvvm_dagger_retrofi_room.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android_mvvm_dagger_retrofi_room.models.GetCity
+import com.example.android_mvvm_dagger_retrofi_room.models.AqiInfo
+import com.example.android_mvvm_dagger_retrofi_room.models.Station
 import com.example.android_mvvm_dagger_retrofi_room.models.apimodel.GetCityFromApi
 import com.example.android_mvvm_dagger_retrofi_room.repository.CityRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,20 +17,40 @@ class MainViewModel @Inject constructor(private val repository: CityRepository) 
     val cityLiveData : LiveData<GetCityFromApi>
     get() = repository.city
 
+    val searchData = MutableLiveData<String>()
+
+    val cityLiveDataFromDataBase : List<String>
+    get() = repository.cityData
+
+    val stationData : MutableList<Station>
+    get() = repository.stationInfo
+
+    val aqiData : LiveData<AqiInfo>
+        get() = repository.aqiInfo
+
+    val checkData : MutableLiveData<Boolean>
+    get() = repository.checkData
+
     init {
-        viewModelScope.launch{
-            Log.d("llllllll",cityLiveData.value.toString())
-            repository.getCity()
+
+        searchData.value = ""
+
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.getCityFromDataBase()
         }
     }
 
-//    val productsLiveData : LiveData<List<Product>>
-//        get() = repository.products
-//
-//    init {
-//        viewModelScope.launch {
-//            repository.getProducts()
-//        }
-//    }
+    suspend fun getCityFromAPi(){
+        repository.getCity(searchData.value!!)
+    }
 
+    suspend fun getStationAndAqiInfo(){
+        Log.d("SHIMUL3 sat",searchData.value.toString())
+        repository.stationAqiInfo(searchData.value!!)
+    }
+
+    suspend fun getAqiInfo(){
+        Log.d("SHIMUL3 aqi",searchData.value.toString())
+        repository.aqiInfo(searchData.value!!)
+    }
 }

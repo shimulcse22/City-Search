@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.android_mvvm_dagger_retrofi_room"
-        minSdk 23
+        minSdk 26
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
         freeCompilerArgs = ['-Xjvm-default=enable']
+    }
+
+    buildFeatures{
+        dataBinding = true
     }
 }
 

@@ -15,10 +15,18 @@ interface CityDao {
     suspend fun insertCity(city: GetCity)
 
     @Transaction
-    @Query("SELECT * FROM aqiInfoTable WHERE aqiInfo = :aqiInfo")
-    suspend fun getAqiInfoAndStation(aqiInfo : Long) : AqiInfoAndStation
+    @Query("SELECT * FROM aqiInfoTable WHERE city = :cityName")
+    suspend fun getAqiInfoAndStation(cityName : String) : List<AqiInfoAndStation>
+
+    @Transaction
+    @Query("SELECT cityName from GetCity")
+    suspend fun getCityFromDataBase() : List<String>
 
     @Transaction
     @Query("SELECT * FROM station WHERE cityName = :cityName")
-    suspend fun getCityWithStation(cityName : String) : List<CityWithStation>
+    suspend fun getStation(cityName: String) : List<Station>
+
+    @Transaction
+    @Query("SELECT * FROM aqiInfoTable WHERE city = :cityName")
+    suspend fun getAqi(cityName: String) : AqiInfo
 }

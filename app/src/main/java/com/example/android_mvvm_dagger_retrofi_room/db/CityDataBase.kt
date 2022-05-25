@@ -12,7 +12,7 @@ import com.example.android_mvvm_dagger_retrofi_room.models.Station
         GetCity::class,
         Station::class
                ],
-    version = 1
+    version = 4
 )
 abstract class CityDataBase : RoomDatabase(){
 
