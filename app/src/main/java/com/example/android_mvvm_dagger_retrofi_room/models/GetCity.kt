@@ -16,5 +16,4 @@ data class GetCity(
 
     @ColumnInfo(name = "message")
     val message: String?
-
 )

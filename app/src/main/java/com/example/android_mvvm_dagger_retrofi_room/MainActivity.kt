@@ -2,23 +2,23 @@ package com.example.android_mvvm_dagger_retrofi_room
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.ContactsContract
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.android_mvvm_dagger_retrofi_room.databinding.ActivityMainBinding
-import com.example.android_mvvm_dagger_retrofi_room.models.Station
+import com.example.android_mvvm_dagger_retrofi_room.models.apimodel.toStationInfo
+import com.example.android_mvvm_dagger_retrofi_room.repository.Response
 import com.example.android_mvvm_dagger_retrofi_room.viewmodel.AppViewModelFactory
 import com.example.android_mvvm_dagger_retrofi_room.viewmodel.MainViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.Serializable
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(){
@@ -41,8 +41,28 @@ class MainActivity : AppCompatActivity(){
         binding.viewModel = mainViewModel
         binding.lifecycleOwner = this
 
-        mainViewModel.cityLiveData.observe(this, Observer {
+        binding.loading.visibility = View.GONE
 
+        mainViewModel.cityLiveData.observe(this, Observer { it ->
+            when(it){
+               is Response.Loading -> {
+                   binding.loading.visibility = View.VISIBLE
+               }
+               is Response.Success -> {
+                   binding.loading.visibility = View.GONE
+                   moveToOtherActivity()
+               }
+               is Response.Error -> {
+                   binding.loading.visibility = View.GONE
+                   Toast.makeText(this,it.error,Toast.LENGTH_LONG).show()
+               }
+            }
+        })
+
+        mainViewModel.aqiData.observe(this,{
+            if(it.city.isNotEmpty()){
+                moveToOtherActivity()
+            }
         })
 
 
@@ -52,19 +72,16 @@ class MainActivity : AppCompatActivity(){
             mainViewModel.searchData.value = adapterView.getItemAtPosition(i).toString()
 
             lifecycleScope.launch {
-                Log.d("SHIMUL","mainViewModel.stationAndAqiData[0].station.placeName")
-                mainViewModel.getStationAndAqiInfo()
-                mainViewModel.getAqiInfo()
+
                 moveToOtherActivity()
             }
         }
 
         binding.image.setOnClickListener {
+            mainViewModel.cityLiveData.value = Response.Loading(null)
             lifecycleScope.launch {
                 mainViewModel.getCityFromAPi()
             }
-
-            moveToOtherActivity()
         }
     }
 
@@ -80,10 +97,8 @@ class MainActivity : AppCompatActivity(){
     }
     private fun moveToOtherActivity(){
         Log.d("SHIMUL FINASLLLLLL", mainViewModel.aqiData.value.toString())
-
         val intent  = Intent(applicationContext,DataShowingActivity::class.java)
-        intent.putExtra("station",mainViewModel.stationData as ArrayList)
-        intent.putExtra("aqi",  mainViewModel.aqiData.value)
+        intent.putExtra("cityName",mainViewModel.searchData.value)
         startActivity(intent)
     }
 }

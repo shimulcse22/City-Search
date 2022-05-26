@@ -8,57 +8,83 @@
             name="viewModel"
             type="com.example.android_mvvm_dagger_retrofi_room.viewmodel.MainViewModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darl_blue"
-        tools:context=".MainActivity">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linear"
-            android:layout_margin="16dp"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            style="@style/AppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/constraint_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <AutoCompleteTextView
-                android:id="@+id/auto_complete_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@={viewModel.searchData}"
-                tools:text="Hello World!"
-                android:backgroundTint="@android:color/transparent"
-                app:layout_constraintEnd_toStartOf="@id/image"
+            android:backgroundTint="@color/blue"
+            app:layout_scrollFlags="noScroll">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image"
+                app:title="Serach" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/darl_blue"
+            tools:context=".MainActivity">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linear"
                 android:layout_margin="16dp"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_baseline_search_24"
-                app:layout_constraintStart_toEndOf="@+id/auto_complete_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/constraint_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@={viewModel.searchData}"
+                    tools:text="Hello World!"
+                    android:backgroundTint="@android:color/transparent"
+                    app:layout_constraintEnd_toStartOf="@id/image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_margin="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_baseline_search_24"
+                    app:layout_constraintStart_toEndOf="@+id/auto_complete_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:indeterminateTint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="50dp"
-            tools:text ="ttat"
-            android:text="@{viewModel.cityLiveData.stations[0].city}"
-            android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/linear"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

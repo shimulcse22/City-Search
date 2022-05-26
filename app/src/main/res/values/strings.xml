@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">android_mvvm_dagger_retrofi_room</string>
+    <string name="city_name">City Name</string>
+    <string name="place_name">Place Name</string>
+    <string name="category">Category</string>
+    <string name="concentration">Concentration</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.example.android_mvvm_dagger_retrofi_room.models.apimodel
 
-
+import com.example.android_mvvm_dagger_retrofi_room.models.StationInfo
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -45,3 +45,15 @@ data class StationFromApi(
     @Json(name = "updatedAt")
     val updatedAt: String
 )
+fun StationFromApi.toStationInfo(): StationInfo {
+    return StationInfo(
+        city,
+        lat,
+        lng,
+        nO2,
+        oZONE,
+        aqiInfoFromApi.concentration,
+        aqiInfoFromApi.category,
+        aqiInfoFromApi.pollutant
+    )
+}
