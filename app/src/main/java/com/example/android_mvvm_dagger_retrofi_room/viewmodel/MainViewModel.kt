@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(private val repository: CityRepository) 
     val cityLiveDataFromDataBase : List<String>
     get() = repository.cityData
 
-    val stationData : MutableList<Station>
+    val stationData : MutableLiveData<MutableList<Station>>
     get() = repository.stationInfo
 
     val aqiData : LiveData<AqiInfo>

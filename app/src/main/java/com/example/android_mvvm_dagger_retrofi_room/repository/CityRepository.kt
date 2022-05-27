@@ -72,8 +72,8 @@ class CityRepository @Inject constructor(
         }
     }
 
-    private var _stationInfo : MutableList<Station> = arrayListOf()
-    val stationInfo : MutableList<Station>
+    private var _stationInfo = MutableLiveData<MutableList<Station>>()
+    val stationInfo : MutableLiveData<MutableList<Station>>
     get() = _stationInfo
 
 
@@ -86,7 +86,7 @@ class CityRepository @Inject constructor(
             Log.d("SHIMUL2", result.toString())
             if(result.isNotEmpty()){
                 checkData.value = true
-                stationInfo.addAll(result)
+                stationInfo.postValue(result)
                 Log.d("SHIMUL2", result.toString())
             }
         }catch (e :Exception){

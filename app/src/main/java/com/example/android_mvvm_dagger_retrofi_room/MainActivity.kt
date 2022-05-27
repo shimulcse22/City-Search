@@ -85,10 +85,6 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    companion object{
-        const val  pass = "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"
-    }
-
     private fun setAdapter(){
         val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,mainViewModel.cityLiveDataFromDataBase)
         binding.autoCompleteText.setAdapter(arrayAdapter)

@@ -24,7 +24,7 @@ interface CityDao {
 
     @Transaction
     @Query("SELECT * FROM station WHERE cityName = :cityName")
-    suspend fun getStation(cityName: String) : List<Station>
+    suspend fun getStation(cityName: String) : MutableList<Station>
 
     @Transaction
     @Query("SELECT * FROM aqiInfoTable WHERE city = :cityName")

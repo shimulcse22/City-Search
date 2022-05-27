@@ -47,14 +47,13 @@ class DataShowingActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.aqiData.observe(this, Observer {
-//            binding.s.text = it?.category
-//            Log.d("LALALLALALA",it.category)
-//            binding.s1.text = mainViewModel.stationData[0].updatedAt
-            mainViewModel.placeName.value = mainViewModel.stationData[0].placeName
-
+        mainViewModel.stationData.observe(this,Observer{
+            mainViewModel.placeName.postValue(it.joinToString { x->x.placeName })
+            binding.other.text = it.joinToString { x->"City     :   "+x.city +"\n\n" +"AQI     :   "+ x.aQI +"\n\n" +
+                    "NO2     :   "+x.nO2+"\n\n"+
+                    "OZONE   :   "+x.oZONE +"\n\n"+
+                    "Dvision :   "+x.division+"\n\n"
+            }
         })
-
-
     }
 }
