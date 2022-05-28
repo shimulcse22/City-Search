@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android_mvvm_dagger_retrofi_room">
+    package="com.example.city_search">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".ProjectApplication"
+        android:name="com.example.com.example.city_search.ProjectApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DataShowingActivity"
+            android:name="com.example.com.example.city_search.DataShowingActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppThemeFullScreen"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.com.example.city_search.MainActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppThemeFullScreen">
