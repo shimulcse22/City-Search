@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.city_search.databinding.ActivityMainBinding
@@ -18,7 +17,7 @@ import com.example.city_search.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
     lateinit var mainViewModel: MainViewModel
 
     lateinit var binding: ActivityMainBinding
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.loading.visibility = View.GONE
 
-        mainViewModel.cityLiveData.observe(this, Observer { it ->
+        mainViewModel.cityLiveData.observe(this) {
             when (it) {
                 is Response.Loading -> {
                     binding.loading.visibility = View.VISIBLE
@@ -53,13 +52,13 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, it.error, Toast.LENGTH_LONG).show()
                 }
             }
-        })
+        }
 
-        mainViewModel.aqiData.observe(this, {
+        mainViewModel.aqiData.observe(this) {
             if (it.city.isNotEmpty()) {
                 moveToOtherActivity()
             }
-        })
+        }
 
 
         setAdapter()
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.searchData.value = adapterView.getItemAtPosition(i).toString()
 
             lifecycleScope.launch {
-
                 moveToOtherActivity()
             }
         }
@@ -93,8 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun moveToOtherActivity() {
-        Log.d("SHIMUL FINASLLLLLL", mainViewModel.aqiData.value.toString())
-        val intent = Intent(applicationContext, DataShowingActivity::class.java)
+        Log.d("CITY ACTIVITY", mainViewModel.aqiData.value.toString())
+        val intent = Intent(applicationContext, CityActivity::class.java)
         intent.putExtra("cityName", mainViewModel.searchData.value)
         startActivity(intent)
     }

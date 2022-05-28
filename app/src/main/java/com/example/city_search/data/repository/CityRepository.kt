@@ -56,7 +56,6 @@ class CityRepository @Inject constructor(
                         item.updatedAt
                     )
                     val aqiInfo = AqiInfo(
-                        0,
                         cityName.lowercase(),
                         item.aqiInfoFromApi.category,
                         item.aqiInfoFromApi.concentration,

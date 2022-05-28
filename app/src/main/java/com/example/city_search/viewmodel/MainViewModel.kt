@@ -35,13 +35,12 @@ class MainViewModel @Inject constructor(private val repository: CityRepository) 
         get() = repository.checkData
 
     init {
-
         searchData.value = ""
 
         viewModelScope.launch(Dispatchers.IO) {
             repository.getCityFromDataBase()
         }
-
+        Log.d("INIT IS CALLED"," ")
     }
 
     suspend fun getCityFromAPi() {

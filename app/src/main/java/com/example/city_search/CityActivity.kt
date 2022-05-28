@@ -3,17 +3,15 @@ package com.example.city_search
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.city_search.R
 import com.example.city_search.databinding.ActivityDataShowingBinding
 import com.example.city_search.viewmodel.AppViewModelFactory
 import com.example.city_search.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DataShowingActivity : AppCompatActivity() {
+class CityActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityDataShowingBinding
@@ -25,7 +23,7 @@ class DataShowingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_data_showing)
 
-        (application as ProjectApplication).applicationComponent.injectDataShowingActivity(this)
+        (application as ProjectApplication).applicationComponent.injectCityActivity(this)
 
         mainViewModel = ViewModelProvider(this, appViewModelFactory)[MainViewModel::class.java]
 
@@ -43,7 +41,7 @@ class DataShowingActivity : AppCompatActivity() {
             }
         }
 
-        mainViewModel.stationData.observe(this, Observer {
+        mainViewModel.stationData.observe(this) {
             mainViewModel.placeName.postValue(it.joinToString { x -> x.placeName })
             binding.other.text = it.joinToString { x ->
                 "City     :   " + x.city + "\n\n" + "AQI     :   " + x.aQI + "\n\n" +
@@ -51,6 +49,6 @@ class DataShowingActivity : AppCompatActivity() {
                         "OZONE   :   " + x.oZONE + "\n\n" +
                         "Dvision :   " + x.division + "\n\n"
             }
-        })
+        }
     }
 }

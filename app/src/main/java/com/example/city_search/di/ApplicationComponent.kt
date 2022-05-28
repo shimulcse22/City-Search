@@ -1,8 +1,8 @@
 package com.example.city_search.di
 
 import android.content.Context
-import com.example.city_search.DataShowingActivity
-import com.example.city_search.MainActivity
+import com.example.city_search.CityActivity
+import com.example.city_search.SearchActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -11,9 +11,9 @@ import javax.inject.Singleton
 @Component(modules = [NetworkModule::class, ViewModelModule::class, DataBaseModule::class])
 interface ApplicationComponent {
 
-    fun inject(mainActivity: MainActivity)
+    fun inject(searchActivity: SearchActivity)
 
-    fun injectDataShowingActivity(dataShowingActivity: DataShowingActivity)
+    fun injectCityActivity(cityActivity: CityActivity)
 
     @Component.Factory
     interface Factory {

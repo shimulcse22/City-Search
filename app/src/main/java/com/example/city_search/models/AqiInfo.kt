@@ -8,10 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "aqiInfoTable")
 
 data class AqiInfo(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "aqiInfoId")
-    val aqiInfoId: Long,
-
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "city")
     val city: String,
 
