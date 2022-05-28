@@ -10,9 +10,9 @@ import androidx.room.PrimaryKey
 data class AqiInfo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "aqiInfoId")
-    val aqiInfoId : Long,
+    val aqiInfoId: Long,
 
-    @ColumnInfo(name="city")
+    @ColumnInfo(name = "city")
     val city: String,
 
     @ColumnInfo(name = "category")

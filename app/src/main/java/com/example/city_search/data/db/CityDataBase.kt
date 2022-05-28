@@ -1,4 +1,4 @@
-package com.example.city_search.db
+package com.example.city_search.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -11,10 +11,10 @@ import com.example.city_search.models.Station
         AqiInfo::class,
         GetCity::class,
         Station::class
-               ],
+    ],
     version = 4
 )
-abstract class CityDataBase : RoomDatabase(){
+abstract class CityDataBase : RoomDatabase() {
 
-    abstract val citDao : CityDao
+    abstract val citDao: CityDao
 }

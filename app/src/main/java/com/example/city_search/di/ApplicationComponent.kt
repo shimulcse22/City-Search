@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class,ViewModelModule::class,DataBaseModule::class])
+@Component(modules = [NetworkModule::class, ViewModelModule::class, DataBaseModule::class])
 interface ApplicationComponent {
 
     fun inject(mainActivity: MainActivity)
@@ -16,8 +16,8 @@ interface ApplicationComponent {
     fun injectDataShowingActivity(dataShowingActivity: DataShowingActivity)
 
     @Component.Factory
-    interface Factory{
-        fun create(@BindsInstance context: Context) : ApplicationComponent
+    interface Factory {
+        fun create(@BindsInstance context: Context): ApplicationComponent
     }
 
 }

@@ -45,6 +45,7 @@ data class StationFromApi(
     @Json(name = "updatedAt")
     val updatedAt: String
 )
+
 fun StationFromApi.toStationInfo(): StationInfo {
     return StationInfo(
         city,

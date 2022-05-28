@@ -15,11 +15,11 @@ import javax.inject.Inject
 
 class DataShowingActivity : AppCompatActivity() {
 
-    lateinit var mainViewModel : MainViewModel
-    private lateinit var binding : ActivityDataShowingBinding
+    lateinit var mainViewModel: MainViewModel
+    private lateinit var binding: ActivityDataShowingBinding
 
     @Inject
-    lateinit var appViewModelFactory : AppViewModelFactory
+    lateinit var appViewModelFactory: AppViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,19 +36,20 @@ class DataShowingActivity : AppCompatActivity() {
 
         mainViewModel.searchData.value = cityName
 
-        if(!cityName.isNullOrBlank()){
+        if (!cityName.isNullOrBlank()) {
             lifecycleScope.launch {
                 mainViewModel.getStationAndAqiInfo()
                 mainViewModel.getAqiInfo()
             }
         }
 
-        mainViewModel.stationData.observe(this,Observer{
-            mainViewModel.placeName.postValue(it.joinToString { x->x.placeName })
-            binding.other.text = it.joinToString { x->"City     :   "+x.city +"\n\n" +"AQI     :   "+ x.aQI +"\n\n" +
-                    "NO2     :   "+x.nO2+"\n\n"+
-                    "OZONE   :   "+x.oZONE +"\n\n"+
-                    "Dvision :   "+x.division+"\n\n"
+        mainViewModel.stationData.observe(this, Observer {
+            mainViewModel.placeName.postValue(it.joinToString { x -> x.placeName })
+            binding.other.text = it.joinToString { x ->
+                "City     :   " + x.city + "\n\n" + "AQI     :   " + x.aQI + "\n\n" +
+                        "NO2     :   " + x.nO2 + "\n\n" +
+                        "OZONE   :   " + x.oZONE + "\n\n" +
+                        "Dvision :   " + x.division + "\n\n"
             }
         })
     }

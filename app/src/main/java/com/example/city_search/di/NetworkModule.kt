@@ -1,6 +1,6 @@
 package com.example.city_search.di
 
-import com.example.city_search.network.ApiService
+import com.example.city_search.data.network.ApiService
 import com.example.city_search.utils.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -23,7 +23,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetroFitInstance(mClient : OkHttpClient, moshi: Moshi): Retrofit {
+    fun provideRetroFitInstance(mClient: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .client(mClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -32,10 +32,9 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun providesApiService(retrofit: Retrofit) :ApiService{
+    fun providesApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
-
 
 
     @Singleton
@@ -50,7 +49,10 @@ class NetworkModule {
         mBuilder.networkInterceptors().add(Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()
             requestBuilder.header("Content-Type", "application/json")
-            requestBuilder.header("x-api-key", "3b306c28026fe67e1b541436924ce4ca1f9efacd413efa167a290d9446f5b866")
+            requestBuilder.header(
+                "x-api-key",
+                "3b306c28026fe67e1b541436924ce4ca1f9efacd413efa167a290d9446f5b866"
+            )
             chain.proceed(requestBuilder.build())
         })
         return mBuilder.build()

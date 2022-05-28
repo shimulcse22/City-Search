@@ -1,4 +1,4 @@
-package com.example.city_search.network
+package com.example.city_search.data.network
 
 import com.example.city_search.models.apimodel.GetCityFromApi
 import retrofit2.Response
@@ -10,6 +10,6 @@ interface ApiService {
     @GET("latest/by-city")
     suspend fun getLatestCity(
         @Query("city") cityName: String,
-    ) : Response<GetCityFromApi>
+    ): Response<GetCityFromApi>
 
 }

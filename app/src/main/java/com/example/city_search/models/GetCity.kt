@@ -11,7 +11,7 @@ import com.squareup.moshi.JsonClass
 data class GetCity(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "cityName")
-    val cityName : String,
+    val cityName: String,
 
     @ColumnInfo(name = "message")
     val message: String?

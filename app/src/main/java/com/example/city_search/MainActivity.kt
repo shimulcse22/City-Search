@@ -12,20 +12,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.city_search.databinding.ActivityMainBinding
-import com.example.city_search.repository.Response
+import com.example.city_search.data.repository.Response
 import com.example.city_search.viewmodel.AppViewModelFactory
 import com.example.city_search.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(){
-    lateinit var mainViewModel : MainViewModel
+class MainActivity : AppCompatActivity() {
+    lateinit var mainViewModel: MainViewModel
 
-    lateinit var binding : ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     @Inject
     lateinit var appViewModelFactory: AppViewModelFactory
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,23 +40,23 @@ class MainActivity : AppCompatActivity(){
         binding.loading.visibility = View.GONE
 
         mainViewModel.cityLiveData.observe(this, Observer { it ->
-            when(it){
-               is Response.Loading -> {
-                   binding.loading.visibility = View.VISIBLE
-               }
-               is Response.Success -> {
-                   binding.loading.visibility = View.GONE
-                   moveToOtherActivity()
-               }
-               is Response.Error -> {
-                   binding.loading.visibility = View.GONE
-                   Toast.makeText(this,it.error,Toast.LENGTH_LONG).show()
-               }
+            when (it) {
+                is Response.Loading -> {
+                    binding.loading.visibility = View.VISIBLE
+                }
+                is Response.Success -> {
+                    binding.loading.visibility = View.GONE
+                    moveToOtherActivity()
+                }
+                is Response.Error -> {
+                    binding.loading.visibility = View.GONE
+                    Toast.makeText(this, it.error, Toast.LENGTH_LONG).show()
+                }
             }
         })
 
-        mainViewModel.aqiData.observe(this,{
-            if(it.city.isNotEmpty()){
+        mainViewModel.aqiData.observe(this, {
+            if (it.city.isNotEmpty()) {
                 moveToOtherActivity()
             }
         })
@@ -82,16 +81,21 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    private fun setAdapter(){
-        val arrayAdapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,mainViewModel.cityLiveDataFromDataBase)
+    private fun setAdapter() {
+        val arrayAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            mainViewModel.cityLiveDataFromDataBase
+        )
         binding.autoCompleteText.setAdapter(arrayAdapter)
         binding.autoCompleteText.threshold = 1
         binding.autoCompleteText.setAdapter(arrayAdapter)
     }
-    private fun moveToOtherActivity(){
+
+    private fun moveToOtherActivity() {
         Log.d("SHIMUL FINASLLLLLL", mainViewModel.aqiData.value.toString())
-        val intent  = Intent(applicationContext,DataShowingActivity::class.java)
-        intent.putExtra("cityName",mainViewModel.searchData.value)
+        val intent = Intent(applicationContext, DataShowingActivity::class.java)
+        intent.putExtra("cityName", mainViewModel.searchData.value)
         startActivity(intent)
     }
 }

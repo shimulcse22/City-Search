@@ -4,14 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.city_search.viewmodel.MainViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             style="@style/AppBar"
@@ -31,43 +34,46 @@
                 app:title="Serach" />
 
         </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/darl_blue"
             tools:context=".MainActivity">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/linear"
-                android:layout_margin="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="16dp"
                 android:background="@drawable/constraint_background"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <AutoCompleteTextView
                     android:id="@+id/auto_complete_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="@={viewModel.searchData}"
-                    tools:text="Hello World!"
                     android:backgroundTint="@android:color/transparent"
+                    android:text="@={viewModel.searchData}"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    tools:text="Hello World!" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
-                    android:layout_margin="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_baseline_search_24"
-                    app:layout_constraintStart_toEndOf="@+id/auto_complete_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_margin="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/auto_complete_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_search_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

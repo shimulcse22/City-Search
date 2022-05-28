@@ -40,7 +40,7 @@ data class Station(
     @ColumnInfo(name = "OZONE")
     val oZONE: Double,
 
-    @ColumnInfo(name ="PM10")
+    @ColumnInfo(name = "PM10")
     val pM10: Double,
 
     @ColumnInfo(name = "PM25")
@@ -61,7 +61,7 @@ data class Station(
     @ColumnInfo(name = "state")
     val state: String,
 
-    @ColumnInfo(name="updateAt")
+    @ColumnInfo(name = "updateAt")
     val updatedAt: String,
 
-)
+    )

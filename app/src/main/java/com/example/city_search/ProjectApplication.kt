@@ -6,7 +6,7 @@ import com.example.city_search.di.DaggerApplicationComponent
 
 class ProjectApplication : Application() {
 
-    lateinit var  applicationComponent : ApplicationComponent
+    lateinit var applicationComponent: ApplicationComponent
     override fun onCreate() {
         super.onCreate()
 

@@ -2,7 +2,7 @@ package com.example.city_search.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.city_search.db.CityDataBase
+import com.example.city_search.data.db.CityDataBase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -19,7 +19,7 @@ class DataBaseModule {
             .build()
     }
 
-    companion object{
+    companion object {
         const val DATABASE_NAME = "city"
     }
 }

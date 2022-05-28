@@ -5,7 +5,7 @@ import androidx.room.Relation
 
 data class AqiInfoAndStation(
     @Embedded
-    val aqiInfo : AqiInfo,
+    val aqiInfo: AqiInfo,
 
     @Relation(
         parentColumn = "city",

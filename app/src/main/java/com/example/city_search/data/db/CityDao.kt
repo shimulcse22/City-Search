@@ -1,4 +1,4 @@
-package com.example.city_search.db
+package com.example.city_search.data.db
 
 import androidx.room.*
 import com.example.city_search.models.*
@@ -16,17 +16,17 @@ interface CityDao {
 
     @Transaction
     @Query("SELECT * FROM aqiInfoTable WHERE city = :cityName")
-    suspend fun getAqiInfoAndStation(cityName : String) : List<AqiInfoAndStation>
+    suspend fun getAqiInfoAndStation(cityName: String): List<AqiInfoAndStation>
 
     @Transaction
     @Query("SELECT cityName from GetCity")
-    suspend fun getCityFromDataBase() : List<String>
+    suspend fun getCityFromDataBase(): List<String>
 
     @Transaction
     @Query("SELECT * FROM station WHERE cityName = :cityName")
-    suspend fun getStation(cityName: String) : MutableList<Station>
+    suspend fun getStation(cityName: String): MutableList<Station>
 
     @Transaction
     @Query("SELECT * FROM aqiInfoTable WHERE city = :cityName")
-    suspend fun getAqi(cityName: String) : AqiInfo
+    suspend fun getAqi(cityName: String): AqiInfo
 }
